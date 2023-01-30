@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { Header } from "./components/Header/Header";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Routes, Route, Navigate } from "react-router-dom";
+import { Weather } from "./components/pages/Weather/Weather";
+import { News } from "./components/pages/News/News";
+import { Home } from "./components/pages/Home/Home";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header />
+
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/weather" element={<Weather />} />
+
+        <Route path="news/*" element={<News />}>
+          <Route index element={<Navigate to="uzbek" />} />
+          <Route path="jahon" element={<h3>Jahon Yangiliklari</h3>} />
+          <Route path="uzbek" element={<h3>O'zbekiston Yangiliklari</h3>} />
+        </Route>
+      </Routes>
     </div>
   );
 }
